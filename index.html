@@ -137,15 +137,16 @@
           <button
             class="w-8 h-8 rounded-full bg-light-grayish-blue hover:bg-desaturated-dark-blue flex items-center justify-center transition-colors duration-300 cursor-pointer group"
             aria-label="공유하기">
-            <!-- 원형 버튼: 32x32px, 연한 회색, 마우스 올리면 진한 파란색으로 변경 -->
+            <!-- 원형 버튼: 32x32px, 연한 회색 배경 -->
+            <!-- hover: 마우스 올리면 진한 파란색 배경 + 아이콘 흰색 변경 -->
             <!-- transition: 색상 변화를 부드럽게 (300ms) -->
-            <!-- group: 자식 요소들이 부모의 hover 상태를 감지할 수 있게 함 -->
+            <!-- group: 자식 SVG가 부모의 hover 상태를 감지할 수 있게 함 -->
 
+            <!-- icon-share.svg: 공유 아이콘 (images/icon-share.svg와 동일) -->
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
               <path fill="#6E8098" class="group-hover:fill-white transition-colors duration-300"
                 d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z" />
             </svg>
-            <!-- group-hover:fill-white: 부모에 마우스 올리면 아이콘 색상 흰색으로 -->
           </button>
         </footer>
       </div>
