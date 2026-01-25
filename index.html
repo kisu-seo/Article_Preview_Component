@@ -1,36 +1,158 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- 파비콘: 브라우저 탭에 보이는 작은 아이콘 -->
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Article preview component</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <title>Article preview component</title>
+
+  <!-- Google Fonts: Manrope 폰트 불러오기 (500, 700 두께) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS: CDN으로 빠르게 불러오기 (별도 설치 불필요) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tailwind 커스텀 설정: 스타일 가이드의 색상을 Tailwind에서 사용할 수 있게 등록 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          // 스타일 가이드의 Grey 시스템 색상 (마치 물감 팔레트에 색 이름 붙이기)
+          colors: {
+            // 새로운 Grey 시스템
+            'grey-900': '#48556A', // 가장 진한 회색 - 제목용
+            'grey-500': '#6E8098', // 중간 회색 - 본문용
+            'grey-400': '#9DAEC2', // 연한 회색 - 날짜/부가정보용
+            'grey-200': '#ECF2F8', // 아주 연한 회색 - 배경용
+
+            // 하위호환성을 위한 기존 이름 유지
+            'very-dark-grayish-blue': '#48556A', // = grey-900
+            'desaturated-dark-blue': '#6E8098',  // = grey-500
+            'grayish-blue': '#9DAEC2',           // = grey-400
+            'light-grayish-blue': '#ECF2F8',     // = grey-200
+          },
+          // 폰트 패밀리 설정
+          fontFamily: {
+            'manrope': ['Manrope', 'sans-serif'],
+          },
+          // 스페이싱 시스템 (일관된 간격을 위한 값들)
+          spacing: {
+            '200': '16px',  // spacing-200
+            '300': '24px',  // spacing-300
+            '400': '32px',  // spacing-400
+            '500': '40px',  // spacing-500
+            '600': '48px',  // spacing-600
+            '700': '56px',  // spacing-700
+            '800': '64px',  // spacing-800
+            '1300': '104px', // spacing-1300
+            '2000': '160px', // spacing-2000
+          },
+        }
+      }
+    }
+  </script>
+
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    /* 푸터 attribution 스타일 */
+    .attribution {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 2rem;
+      color: hsl(217, 19%, 35%);
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
   </style>
 </head>
-<body>
 
-  Shift the overall look and feel by adding these wonderful 
-  touches to furniture in your home
+<body class="bg-light-grayish-blue font-manrope min-h-screen flex items-center justify-center p-6">
+  <!-- 전체 배경: 연한 회색, Manrope 폰트, 화면 전체 높이, 가운데 정렬, 여백 -->
 
-  Ever been in a room and felt like something was missing? Perhaps 
-  it felt slightly bare and uninviting. I’ve got some simple tips 
-  to help you make any room feel complete.
+  <!-- main: 페이지의 주요 컨텐츠 (시맨틱 태그) -->
+  <main class="w-full max-w-[730px]">
+    <!-- 최대 너비 730px로 제한 (데스크톱에서 너무 넓어지지 않게) -->
 
-  Michelle Appleton
-  28 Jun 2020
+    <!-- article: 독립적인 콘텐츠 블록 (마치 신문의 기사 하나) -->
+    <article class="bg-white rounded-xl shadow-xl overflow-hidden md:flex md:flex-row flex-col">
+      <!-- 배경 흰색, 둥근 모서리, 그림자, 넘치는 부분 숨김 -->
+      <!-- 모바일: 세로 배치(flex-col), 데스크톱(md:): 가로 배치(flex-row) -->
 
-  Share
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+      <!-- figure: 이미지를 감싸는 시맨틱 태그 -->
+      <figure class="md:w-[285px] md:h-[280px] h-[200px] flex-shrink-0">
+        <!-- 데스크톱: 너비 285px, 높이 280px / 모바일: 높이 200px -->
+        <!-- flex-shrink-0: 공간이 부족해도 이미지 크기 유지 -->
+
+        <img src="./images/drawers.jpg" alt="서랍장 위에 놓인 꽃병과 장식품" class="w-full h-full object-cover">
+        <!-- object-cover: 이미지 비율 유지하며 영역 꽉 채우기 (마치 액자에 사진 맞추기) -->
+      </figure>
+
+      <!-- 카드의 텍스트 내용 영역 -->
+      <div class="flex flex-col p-8 md:p-10">
+        <!-- 여백: 모바일 32px, 데스크톱 40px -->
+
+        <!-- header: 제목과 본문 영역 -->
+        <header class="flex-grow">
+          <h1 class="text-very-dark-grayish-blue text-base md:text-xl font-bold leading-snug mb-3 md:mb-4">
+            <!-- 제목 스타일: 진한 회색, 크기 16px→20px, 굵게, 줄간격 좁게, 아래 여백 -->
+            Shift the overall look and feel by adding these wonderful touches to furniture in your home
+          </h1>
+
+          <p class="text-desaturated-dark-blue text-[13px] leading-relaxed">
+            <!-- 본문 스타일: 중간 회색, 13px, 줄간격 여유있게 -->
+            Ever been in a room and felt like something was missing? Perhaps it felt slightly bare and uninviting. I've
+            got some simple tips to help you make any room feel complete.
+          </p>
+        </header>
+
+        <!-- footer: 작성자 정보 영역 -->
+        <footer class="flex items-center justify-between mt-8 md:mt-6">
+          <!-- 가로 배치, 세로 가운데 정렬, 양쪽 끝 정렬, 위쪽 여백 -->
+
+          <!-- 작성자 정보 그룹 -->
+          <div class="flex items-center gap-4">
+            <!-- 가로 배치, 세로 가운데 정렬, 16px 간격 -->
+
+            <img src="./images/avatar-michelle.jpg" alt="Michelle Appleton 프로필 사진" class="w-10 h-10 rounded-full">
+            <!-- 원형 프로필 사진: 40x40px, 완전히 둥글게 -->
+
+            <div>
+              <p class="text-very-dark-grayish-blue text-[13px] font-bold">
+                Michelle Appleton
+              </p>
+              <p class="text-grayish-blue text-[13px]">
+                28 Jun 2020
+              </p>
+            </div>
+          </div>
+
+          <!-- 공유 버튼 -->
+          <button
+            class="w-8 h-8 rounded-full bg-light-grayish-blue hover:bg-desaturated-dark-blue flex items-center justify-center transition-colors duration-300 cursor-pointer group"
+            aria-label="공유하기">
+            <!-- 원형 버튼: 32x32px, 연한 회색, 마우스 올리면 진한 파란색으로 변경 -->
+            <!-- transition: 색상 변화를 부드럽게 (300ms) -->
+            <!-- group: 자식 요소들이 부모의 hover 상태를 감지할 수 있게 함 -->
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+              <path fill="#6E8098" class="group-hover:fill-white transition-colors duration-300"
+                d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z" />
+            </svg>
+            <!-- group-hover:fill-white: 부모에 마우스 올리면 아이콘 색상 흰색으로 -->
+          </button>
+        </footer>
+      </div>
+    </article>
+
+  </main>
+
 </body>
+
 </html>
