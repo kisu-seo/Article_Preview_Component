@@ -173,28 +173,31 @@
 
           <!-- 공유 팝업: 처음엔 숨겨져 있다가 버튼 클릭 시 나타남 -->
           <div id="sharePopup"
-            class="hidden absolute bottom-full right-0 mb-2 bg-very-dark-grayish-blue rounded-lg shadow-2xl px-8 py-4 flex items-center gap-4 z-10"
+            class="hidden absolute bottom-full right-4 translate-x-1/2 mb-4 bg-very-dark-grayish-blue rounded-lg shadow-2xl px-8 py-[18px] flex items-center gap-4 z-10"
             role="tooltip">
             <!-- id: JavaScript에서 이 팝업을 찾기 위한 고유 식별자 -->
             <!-- hidden: 처음엔 숨김 (JavaScript로 제어) -->
             <!-- absolute: 절대 위치 (부모를 기준으로 배치) -->
-            <!-- bottom-full: 버튼 위쪽에 배치 -->
-            <!-- right-0: 오른쪽 정렬 -->
-            <!-- mb-2: 버튼과 8px 간격 -->
+            <!-- bottom-full: 버튼 바로 위쪽에 배치 -->
+            <!-- right-4: footer 오른쪽에서 16px (공유 버튼의 정중앙) -->
+            <!-- translate-x-1/2: 팝업의 중앙이 버튼 중앙에 오도록 오른쪽으로 이동 -->
+            <!-- mb-4: 버튼과 16px 간격 (말풍선 꼬리 공간) -->
             <!-- bg-very-dark-grayish-blue: 진한 회색 배경 -->
             <!-- rounded-lg: 둥근 모서리 -->
             <!-- shadow-2xl: 큰 그림자 -->
-            <!-- px-8 py-4: 가로 32px, 세로 16px 여백 -->
+            <!-- px-8 py-[18px]: 가로 32px, 세로 18px 여백 -->
             <!-- flex items-center gap-4: 가로 배치, 세로 가운데 정렬, 16px 간격 -->
             <!-- z-10: 버튼보다 아래, 다른 요소보다는 위에 -->
             <!-- role="tooltip": 스크린 리더를 위한 툴팁 역할 명시 -->
 
             <!-- 말풍선 꼬리 (아래쪽 삼각형) -->
             <div
-              class="absolute top-full right-8 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-very-dark-grayish-blue">
+              class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-very-dark-grayish-blue">
               <!-- absolute top-full: 팝업 하단에 배치 -->
-              <!-- right-8: 오른쪽에서 32px 떨어진 위치 (버튼 중앙과 맞춤) -->
+              <!-- left-1/2 -translate-x-1/2: 팝업의 정중앙에 배치 -->
+              <!-- -mt-[1px]: 위로 1px 당겨서 틈새 제거 -->
               <!-- border를 이용해 삼각형 모양 만들기 (CSS 트릭) -->
+              <!-- 크기: 12px로 약간 크게 조정 -->
             </div>
 
             <!-- SHARE 텍스트 -->
