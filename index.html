@@ -88,8 +88,8 @@
   <!-- 전체 배경: 연한 회색, Manrope 폰트, 화면 전체 높이, 가운데 정렬, 여백 -->
 
   <!-- main: 페이지의 주요 컨텐츠 (시맨틱 태그) -->
-  <main class="w-full max-w-[730px]">
-    <!-- 최대 너비 730px로 제한 (데스크톱에서 너무 넓어지지 않게) -->
+  <main class="w-full max-w-full md:max-w-[608px] min-[1440px]:max-w-[730px]">
+    <!-- 모바일: 전체 너비, 태블릿(768px): 608px, 데스크톱(1440px): 730px -->
 
     <!-- article: 독립적인 콘텐츠 블록 (마치 신문의 기사 하나) -->
     <article class="bg-white rounded-xl shadow-xl overflow-visible md:flex md:flex-row flex-col relative">
@@ -99,21 +99,26 @@
       <!-- 모바일: 세로 배치(flex-col), 데스크톱(md:): 가로 배치(flex-row) -->
 
       <!-- figure: 이미지를 감싸는 시맨틱 태그 -->
-      <figure class="md:w-[285px] h-[200px] md:h-auto flex-shrink-0 overflow-hidden md:rounded-l-xl">
-        <!-- 모바일: 높이 200px 고정 / 데스크톱: 높이 자동(카드 전체 높이에 맞춤) -->
-        <!-- 너비: 데스크톱에서 285px 고정 -->
+      <figure
+        class="md:w-[229px] min-[1440px]:w-[285px] h-[200px] md:h-auto flex-shrink-0 overflow-hidden md:rounded-l-xl">
+        <!-- 모바일: 높이 200px 고정 / 태블릿~데스크톱: 높이 자동(카드 전체 높이에 맞춤) -->
+        <!-- 너비: 태블릿 229px, 데스크톱(1440px) 285px -->
         <!-- flex-shrink-0: 공간이 부족해도 이미지 크기 유지 -->
         <!-- overflow-hidden: 이미지가 영역 밖으로 나가지 않도록 자르기 -->
-        <!-- md:rounded-l-xl: 데스크톱에서 왼쪽 모서리만 둥글게 -->
+        <!-- md:rounded-l-xl: 태블릿~데스크톱에서 왼쪽 모서리만 둥글게 -->
 
-        <img src="./images/drawers.jpg" alt="서랍장 위에 놓인 꽃병과 장식품" class="w-full h-full object-cover">
+        <img src="./images/drawers.jpg" alt="서랍장 위에 놓인 꽃병과 장식품"
+          class="w-full h-full object-cover object-center md:object-left">
         <!-- w-full h-full: 너비와 높이를 부모 영역에 100% 맞춤 -->
         <!-- object-cover: 이미지 비율 유지하며 영역 꽉 채우기 (마치 액자에 사진 맞추기) -->
+        <!-- object-center: 모바일(~767px)에서 녹색 서랍장과 꽃병을 중앙에 보여주기 (원래 디자인) -->
+        <!-- md:object-left: 데스크톱(768px~)에서 왼쪽부터 보여주기 (쿠션 포함, 원래 디자인) -->
       </figure>
 
       <!-- 카드의 텍스트 내용 영역 -->
-      <div class="flex flex-col p-8 md:px-10 md:py-[30px]">
-        <!-- 여백: 모바일 32px(전체), 데스크톱 가로 40px & 세로 30px -->
+      <div
+        class="flex flex-col p-8 md:pl-[32px] md:pr-[36px] md:py-[41px] min-[1440px]:pl-10 min-[1440px]:pr-10 min-[1440px]:py-[30px]">
+        <!-- 여백: 모바일 32px(전체), 태블릿(768px~) 좌 32px & 우 36px & 상하 41px, 데스크톱(1440px~) 좌우 40px & 상하 30px -->
 
         <!-- header: 제목과 본문 영역 -->
         <header class="flex-grow">
@@ -173,7 +178,7 @@
 
           <!-- 공유 팝업: 처음엔 숨겨져 있다가 버튼 클릭 시 나타남 -->
           <div id="sharePopup"
-            class="hidden absolute bottom-full right-4 translate-x-1/2 mb-4 bg-very-dark-grayish-blue rounded-lg shadow-2xl px-8 py-[18px] flex items-center gap-4 z-10"
+            class="hidden absolute bottom-full right-4 translate-x-1/2 mb-[30px] bg-very-dark-grayish-blue rounded-lg shadow-2xl px-[38px] py-[18px] flex items-center z-10"
             role="tooltip">
             <!-- id: JavaScript에서 이 팝업을 찾기 위한 고유 식별자 -->
             <!-- hidden: 처음엔 숨김 (JavaScript로 제어) -->
@@ -181,12 +186,12 @@
             <!-- bottom-full: 버튼 바로 위쪽에 배치 -->
             <!-- right-4: footer 오른쪽에서 16px (공유 버튼의 정중앙) -->
             <!-- translate-x-1/2: 팝업의 중앙이 버튼 중앙에 오도록 오른쪽으로 이동 -->
-            <!-- mb-4: 버튼과 16px 간격 (말풍선 꼬리 공간) -->
+            <!-- mb-[30px]: 버튼과 30px 간격 (팝업이 더 위로 떠 있도록) -->
             <!-- bg-very-dark-grayish-blue: 진한 회색 배경 -->
             <!-- rounded-lg: 둥근 모서리 -->
             <!-- shadow-2xl: 큰 그림자 -->
-            <!-- px-8 py-[18px]: 가로 32px, 세로 18px 여백 -->
-            <!-- flex items-center gap-4: 가로 배치, 세로 가운데 정렬, 16px 간격 -->
+            <!-- px-[38px] py-[18px]: 가로 38px, 세로 18px 여백 -->
+            <!-- flex items-center: 가로 배치, 세로 가운데 정렬 (gap 제거) -->
             <!-- z-10: 버튼보다 아래, 다른 요소보다는 위에 -->
             <!-- role="tooltip": 스크린 리더를 위한 툴팁 역할 명시 -->
 
@@ -201,9 +206,10 @@
             </div>
 
             <!-- SHARE 텍스트 -->
-            <span class="text-grayish-blue text-[13px] tracking-[0.3em] font-medium uppercase">
+            <span class="text-grayish-blue text-[13px] tracking-[0.3em] font-medium uppercase mr-6">
               <!-- tracking-[0.3em]: 글자 간격 넓게 (25% letter spacing) -->
               <!-- uppercase: 대문자로 변환 -->
+              <!-- mr-6: 오른쪽 여백 24px (아이콘 그룹과의 간격) -->
               SHARE
             </span>
 
