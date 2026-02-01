@@ -13,7 +13,7 @@
 
 ### Screenshot
 
-![Project Screenshot](./article_preview_component.jpg)
+![Project Screenshot](./article_preview_component.png)
 
 ### Links
 
