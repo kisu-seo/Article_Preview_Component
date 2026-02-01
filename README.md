@@ -1,4 +1,4 @@
-# FAQ accordion
+# Article preview component
 
 ## Table of contents
 
@@ -13,12 +13,12 @@
 
 ### Screenshot
 
-![Project Screenshot](./faq-accordion-main.png)
+![Project Screenshot](./article_preview_component.jpg)
 
 ### Links
 
-- Solution URL: [Solution URL](https://github.com/kisu-seo/faq-accordion-main)
-- Live Site URL: [Live URL](https://kisu-seo.github.io/faq-accordion-main/)
+- Solution URL: [Solution URL](https://github.com/kisu-seo/Article_Preview_Component)
+- Live Site URL: [Live URL](https://kisu-seo.github.io/Article_Preview_Component/)
 
 ## My process
 
