@@ -186,16 +186,13 @@
             </div>
 
             <!-- 공유 버튼 (오른쪽) -->
-            <button id="shareButton"
-              type="button"
+            <button id="shareButton" type="button"
               class="w-8 h-8 rounded-full bg-light-grayish-blue hover:bg-desaturated-dark-blue flex items-center justify-center transition-colors duration-300 cursor-pointer group relative z-20"
-              aria-label="공유하기" 
-              aria-expanded="false"
-              aria-controls="sharePopup mobileShareBar">
+              aria-label="공유하기" aria-expanded="false">
               <!-- id: JavaScript에서 이 버튼을 찾기 위한 고유 식별자 -->
               <!-- type="button": 버튼 타입 명시 (form submit 방지, 접근성 표준) -->
               <!-- aria-label: 스크린 리더를 위한 버튼 설명 (접근성) -->
-              <!-- aria-controls: 이 버튼이 제어하는 팝업/바의 ID 명시 (접근성) -->
+              <!-- aria-controls: JavaScript에서 동적으로 설정 (모바일/데스크톱 분기) -->
               <!-- aria-expanded: 팝업/바가 열렸는지 닫혔는지 상태 표시 (접근성) -->
               <!-- z-20: 데스크톱 팝업보다 위에 표시되도록 레이어 순서 설정 -->
               <!-- 원형 버튼: 32x32px, 연한 회색 배경 -->
@@ -210,172 +207,164 @@
               </svg>
             </button>
           </div>
-
-          <!-- 데스크톱용 공유 팝업: 처음엔 숨겨져 있다가 버튼 클릭 시 나타남 -->
-          <!-- 이 영역은 데스크톱에서 공유 버튼을 누르면 나타나는 공유 다이얼로그입니다.
-               접근성을 높이기 위해 WAI-ARIA 표준에 따라 section 태그에 dialog 역할로 설정했습니다.
-               시맨틱 HTML 요소(section)를 사용해 문서 구조를 개선하고,
-               aria-modal="true"로 다이얼로그임을 명확히 알리고,
-               aria-labelledby="sharePopupLabel"로 다이얼로그의 제목을 연결했습니다. -->
-          <section id="sharePopup"
-            class="hidden absolute bottom-full right-4 translate-x-1/2 mb-[30px] bg-very-dark-grayish-blue rounded-lg shadow-2xl px-[38px] py-[18px] flex items-center z-10"
-            role="dialog" 
-            aria-modal="true" 
-            aria-labelledby="sharePopupLabel">
-            <!-- section: 시맨틱 HTML5 요소로 문서 구조 개선 (div보다 의미있음) -->
-            <!-- hidden: 처음엔 숨김 (JavaScript로 제어) -->
-            <!-- role="dialog": 스크린 리더에게 다이얼로그 역할임을 알림 (접근성) -->
-            <!-- aria-modal="true": 모달 다이얼로그임을 명시 (접근성) -->
-            <!-- aria-labelledby="sharePopupLabel": 다이얼로그의 제목과 연결 (접근성) -->
-            <!-- md:absolute: 태블릿/데스크톱에서만 절대 위치 (부모를 기준으로 배치) -->
-            <!-- md:bottom-full: 버튼 바로 위쪽에 배치 -->
-            <!-- md:right-4: footer 오른쪽에서 16px (공유 버튼의 정중앙) -->
-            <!-- md:translate-x-1/2: 팝업의 중앙이 버튼 중앙에 오도록 오른쪽으로 이동 -->
-            <!-- md:mb-[30px]: 버튼과 30px 간격 (팝업이 더 위로 떠 있도록) -->
-            <!-- bg-very-dark-grayish-blue: 진한 회색 배경 -->
-            <!-- rounded-lg: 둥근 모서리 -->
-            <!-- shadow-2xl: 큰 그림자 -->
-            <!-- px-[38px] py-[18px]: 가로 38px, 세로 18px 여백 -->
-            <!-- md:flex items-center: 태블릿/데스크톱에서만 flex, 가로 배치, 세로 가운데 정렬 -->
-            <!-- z-10: 버튼보다 아래, 다른 요소보다는 위에 -->
-
-            <!-- 스크린 리더 전용 제목: 시각적으로는 숨기고 접근성만 제공 -->
-            <h2 id="sharePopupLabel" class="sr-only">공유하기</h2>
-
-            <!-- 말풍선 꼬리 (아래쪽 삼각형) - 데스크톱 전용 -->
-            <div
-              class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-very-dark-grayish-blue">
-              <!-- absolute top-full: 팝업 하단에 배치 -->
-              <!-- left-1/2 -translate-x-1/2: 팝업의 정중앙에 배치 -->
-              <!-- -mt-[1px]: 위로 1px 당겨서 틈새 제거 -->
-              <!-- border를 이용해 삼각형 모양 만들기 (CSS 트릭) -->
-              <!-- 크기: 12px로 약간 크게 조정 -->
-            </div>
-
-            <!-- SHARE 텍스트 -->
-            <span class="text-grayish-blue text-[13px] tracking-[0.3em] font-medium uppercase mr-6">
-              <!-- tracking-[0.3em]: 글자 간격 넓게 (30% letter spacing) -->
-              <!-- uppercase: 대문자로 변환 -->
-              <!-- mr-6: 오른쪽 여백 24px (아이콘 그룹과의 간격) -->
-              SHARE
-            </span>
-
-            <!-- 소셜 미디어 아이콘들 -->
-            <div class="flex items-center gap-4" role="group" aria-label="소셜 미디어 공유 옵션">
-              <!-- role="group": 관련된 버튼들을 그룹으로 묶음 (접근성) -->
-              
-              <!-- Facebook 아이콘 -->
-              <button type="button" aria-label="Facebook에 공유" class="hover:opacity-70 transition-opacity">
-                <!-- type="button": 액션 버튼임을 명시 (링크가 아닌 버튼이 적절) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                  <path fill="#FFF"
-                    d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z" />
-                </svg>
-              </button>
-
-              <!-- Twitter 아이콘 -->
-              <button type="button" aria-label="Twitter에 공유" class="hover:opacity-70 transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17">
-                  <path fill="#FFF"
-                    d="M20 2.172a8.192 8.192 0 01-2.357.646 4.11 4.11 0 001.804-2.27 8.22 8.22 0 01-2.605.996A4.096 4.096 0 0013.847.248c-2.65 0-4.596 2.472-3.998 5.037A11.648 11.648 0 011.392 1a4.109 4.109 0 001.27 5.478 4.086 4.086 0 01-1.858-.513c-.045 1.9 1.318 3.679 3.291 4.075a4.113 4.113 0 01-1.853.07 4.106 4.106 0 003.833 2.849A8.25 8.25 0 010 14.658a11.616 11.616 0 006.29 1.843c7.618 0 11.922-6.434 11.663-12.205A8.354 8.354 0 0020 2.172z" />
-                </svg>
-              </button>
-
-              <!-- Pinterest 아이콘 -->
-              <button type="button" aria-label="Pinterest에 공유" class="hover:opacity-70 transition-opacity">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                  <path fill="#FFF"
-                    d="M10 0C4.478 0 0 4.477 0 10c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.522 0 10-4.477 10-10S15.522 0 10 0z" />
-                </svg>
-              </button>
-            </div>
-          </section>
         </footer>
       </div>
+    </article>
 
-      <!-- 모바일용 공유 바: article 하단에 절대 위치로 배치 -->
-      <section id="mobileShareBar"
-        class="hidden absolute bottom-0 left-0 right-0 h-16 bg-very-dark-grayish-blue rounded-b-xl px-8 flex items-center justify-between md:hidden z-30"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="mobileShareBarLabel">
-        <!-- section: 시맨틱 HTML5 요소로 문서 구조 개선 (div보다 의미있음) -->
-        <!-- hidden: 처음엔 숨김 (JavaScript로 제어) -->
-        <!-- role="dialog": 스크린 리더에게 다이얼로그 역할임을 알림 (접근성) -->
-        <!-- aria-modal="true": 모달 다이얼로그임을 명시 (접근성) -->
-        <!-- aria-labelledby="mobileShareBarLabel": 다이얼로그의 제목과 연결 (접근성) -->
-        <!-- absolute: 절대 위치로 article 카드 기준으로 배치 -->
-        <!-- bottom-0 left-0 right-0: 카드 하단에 가로로 꽉 차게 배치 -->
-        <!-- h-16: 높이 64px (디자인 가이드 기준) -->
-        <!-- bg-very-dark-grayish-blue: 진한 회색 배경 (#48556A) -->
-        <!-- rounded-b-xl: 카드 하단 모서리와 동일한 둥근 모서리 -->
-        <!-- px-8: 좌우 32px 여백 -->
-        <!-- flex items-center justify-between: 가로 배치, 세로 가운데, 양쪽 끝 정렬 -->
-        <!-- md:hidden: 태블릿/데스크톱에서는 숨김 (데스크톱은 팝업 사용) -->
-        <!-- z-30: 다른 요소들보다 위에 표시 -->
+    <!-- 데스크톱용 공유 팝업: article 밖에 독립적으로 배치 -->
+    <!-- 다이얼로그는 메인 콘텐츠와 분리하여 문서 구조를 명확하게 합니다.
+         접근성을 높이기 위해 WAI-ARIA 표준에 따라 section 태그에 dialog 역할로 설정했습니다.
+         시맨틱 HTML 요소(section)를 사용해 문서 구조를 개선하고,
+         aria-modal="true"로 다이얼로그임을 명확히 알리고,
+         aria-labelledby="sharePopupLabel"로 다이얼로그의 제목을 연결했습니다. -->
+    <section id="sharePopup"
+      class="hidden fixed bg-very-dark-grayish-blue rounded-lg shadow-2xl px-[38px] py-[18px] flex items-center z-[100] md:flex md:items-center"
+      role="dialog" aria-modal="true" aria-labelledby="sharePopupLabel">
+      <!-- section: 시맨틱 HTML5 요소로 문서 구조 개선 (div보다 의미있음) -->
+      <!-- hidden: 처음엔 숨김 (JavaScript로 제어) -->
+      <!-- fixed: 뷰포트 기준 고정 위치 (article 밖에 있으므로 변경) -->
+      <!-- role="dialog": 스크린 리더에게 다이얼로그 역할임을 알림 (접근성) -->
+      <!-- aria-modal="true": 모달 다이얼로그임을 명시 (접근성) -->
+      <!-- aria-labelledby="sharePopupLabel": 다이얼로그의 제목과 연결 (접근성) -->
+      <!-- z-[100]: 다른 모든 요소보다 위에 표시 (독립적인 레이어) -->
+      <!-- 위치는 JavaScript로 동적 계산하여 버튼 위에 배치 -->
 
-        <!-- 스크린 리더 전용 제목: 시각적으로는 숨기고 접근성만 제공 -->
-        <h2 id="mobileShareBarLabel" class="sr-only">공유하기</h2>
+      <!-- 스크린 리더 전용 제목: 시각적으로는 숨기고 접근성만 제공 -->
+      <h2 id="sharePopupLabel" class="sr-only">공유하기</h2>
 
-        <!-- 왼쪽: SHARE 텍스트와 소셜 미디어 아이콘들 -->
-        <div class="flex items-center gap-5">
-          <!-- SHARE 텍스트 -->
-          <span class="text-grayish-blue text-[13px] tracking-[0.3em] font-medium uppercase">
-            <!-- tracking-[0.3em]: 글자 간격 넓게 (자간 300%) -->
-            <!-- uppercase: 대문자로 변환 -->
-            SHARE
-          </span>
+      <!-- 말풍선 꼬리 (아래쪽 삼각형) - 데스크톱 전용 -->
+      <div
+        class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-t-[12px] border-t-very-dark-grayish-blue">
+        <!-- absolute top-full: 팝업 하단에 배치 -->
+        <!-- left-1/2 -translate-x-1/2: 팝업의 정중앙에 배치 -->
+        <!-- -mt-[1px]: 위로 1px 당겨서 틈새 제거 -->
+        <!-- border를 이용해 삼각형 모양 만들기 (CSS 트릭) -->
+        <!-- 크기: 12px로 약간 크게 조정 -->
+      </div>
 
-          <!-- 소셜 미디어 아이콘들 -->
-          <div class="flex items-center gap-4" role="group" aria-label="소셜 미디어 공유 옵션">
-            <!-- role="group": 관련된 버튼들을 그룹으로 묶음 (접근성) -->
-            
-            <!-- Facebook 아이콘 -->
-            <button type="button" aria-label="Facebook에 공유" class="hover:opacity-70 transition-opacity">
-              <!-- type="button": 액션 버튼임을 명시 (링크가 아닌 버튼이 적절) -->
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                <path fill="#FFF"
-                  d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z" />
-              </svg>
-            </button>
+      <!-- SHARE 텍스트 -->
+      <span class="text-grayish-blue text-[13px] tracking-[0.3em] font-medium uppercase mr-6">
+        <!-- tracking-[0.3em]: 글자 간격 넓게 (30% letter spacing) -->
+        <!-- uppercase: 대문자로 변환 -->
+        <!-- mr-6: 오른쪽 여백 24px (아이콘 그룹과의 간격) -->
+        SHARE
+      </span>
 
-            <!-- Twitter 아이콘 -->
-            <button type="button" aria-label="Twitter에 공유" class="hover:opacity-70 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17">
-                <path fill="#FFF"
-                  d="M20 2.172a8.192 8.192 0 01-2.357.646 4.11 4.11 0 001.804-2.27 8.22 8.22 0 01-2.605.996A4.096 4.096 0 0013.847.248c-2.65 0-4.596 2.472-3.998 5.037A11.648 11.648 0 011.392 1a4.109 4.109 0 001.27 5.478 4.086 4.086 0 01-1.858-.513c-.045 1.9 1.318 3.679 3.291 4.075a4.113 4.113 0 01-1.853.07 4.106 4.106 0 003.833 2.849A8.25 8.25 0 010 14.658a11.616 11.616 0 006.29 1.843c7.618 0 11.922-6.434 11.663-12.205A8.354 8.354 0 0020 2.172z" />
-              </svg>
-            </button>
+      <!-- 소셜 미디어 아이콘들 -->
+      <div class="flex items-center gap-4" role="group" aria-label="소셜 미디어 공유 옵션">
+        <!-- role="group": 관련된 버튼들을 그룹으로 묶음 (접근성) -->
 
-            <!-- Pinterest 아이콘 -->
-            <button type="button" aria-label="Pinterest에 공유" class="hover:opacity-70 transition-opacity">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
-                <path fill="#FFF"
-                  d="M10 0C4.478 0 0 4.477 0 10c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.522 0 10-4.477 10-10S15.522 0 10 0z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- 오른쪽: 공유 버튼 (활성화 상태) -->
-        <button id="mobileShareButtonClose"
-          type="button"
-          class="w-8 h-8 rounded-full bg-desaturated-dark-blue hover:bg-very-dark-grayish-blue flex items-center justify-center flex-shrink-0 transition-colors"
-          aria-label="공유 메뉴 닫기">
-          <!-- id: JavaScript에서 이 버튼을 찾기 위한 고유 식별자 -->
-          <!-- type="button": 버튼 타입 명시 (form submit 방지, 접근성 표준) -->
-          <!-- aria-label: 스크린 리더를 위한 버튼 설명 "공유 메뉴 닫기" (접근성) -->
-          <!-- w-8 h-8: 32x32px 크기 -->
-          <!-- rounded-full: 완전히 둥근 원형 -->
-          <!-- bg-desaturated-dark-blue: 중간 회색 배경 (활성화된 버튼 색상) -->
-          <!-- hover:bg-very-dark-grayish-blue: 호버 시 더 진한 색상 -->
-          <!-- flex-shrink-0: 공간이 부족해도 버튼 크기 유지 -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+        <!-- Facebook 아이콘 -->
+        <button type="button" aria-label="Facebook에 공유" class="hover:opacity-70 transition-opacity">
+          <!-- type="button": 액션 버튼임을 명시 (링크가 아닌 버튼이 적절) -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
             <path fill="#FFF"
-              d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z" />
+              d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z" />
           </svg>
         </button>
-      </section>
+
+        <!-- Twitter 아이콘 -->
+        <button type="button" aria-label="Twitter에 공유" class="hover:opacity-70 transition-opacity">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17">
+            <path fill="#FFF"
+              d="M20 2.172a8.192 8.192 0 01-2.357.646 4.11 4.11 0 001.804-2.27 8.22 8.22 0 01-2.605.996A4.096 4.096 0 0013.847.248c-2.65 0-4.596 2.472-3.998 5.037A11.648 11.648 0 011.392 1a4.109 4.109 0 001.27 5.478 4.086 4.086 0 01-1.858-.513c-.045 1.9 1.318 3.679 3.291 4.075a4.113 4.113 0 01-1.853.07 4.106 4.106 0 003.833 2.849A8.25 8.25 0 010 14.658a11.616 11.616 0 006.29 1.843c7.618 0 11.922-6.434 11.663-12.205A8.354 8.354 0 0020 2.172z" />
+          </svg>
+        </button>
+
+        <!-- Pinterest 아이콘 -->
+        <button type="button" aria-label="Pinterest에 공유" class="hover:opacity-70 transition-opacity">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+            <path fill="#FFF"
+              d="M10 0C4.478 0 0 4.477 0 10c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.522 0 10-4.477 10-10S15.522 0 10 0z" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- 모바일용 공유 바: article 밖에 독립적으로 배치 -->
+    <!-- 다이얼로그는 메인 콘텐츠와 분리하여 문서 구조를 명확하게 합니다.
+         시맨틱 HTML 요소(section)를 사용해 문서 구조를 개선하고,
+         aria-modal="true"로 다이얼로그임을 명확히 알리고,
+         aria-labelledby="mobileShareBarLabel"로 다이얼로그의 제목을 연결했습니다. -->
+    <section id="mobileShareBar"
+      class="hidden fixed bottom-0 left-0 right-0 h-16 bg-very-dark-grayish-blue px-8 flex items-center justify-between md:hidden z-[100]"
+      role="dialog" aria-modal="true" aria-labelledby="mobileShareBarLabel">
+      <!-- section: 시맨틱 HTML5 요소로 문서 구조 개선 (div보다 의미있음) -->
+      <!-- hidden: 처음엔 숨김 (JavaScript로 제어) -->
+      <!-- fixed: 뷰포트 기준 고정 위치 (article 밖에 있으므로 변경) -->
+      <!-- bottom-0 left-0 right-0: 화면 하단에 가로로 꽉 차게 배치 -->
+      <!-- role="dialog": 스크린 리더에게 다이얼로그 역할임을 알림 (접근성) -->
+      <!-- aria-modal="true": 모달 다이얼로그임을 명시 (접근성) -->
+      <!-- aria-labelledby="mobileShareBarLabel": 다이얼로그의 제목과 연결 (접근성) -->
+      <!-- h-16: 높이 64px (디자인 가이드 기준) -->
+      <!-- bg-very-dark-grayish-blue: 진한 회색 배경 (#48556A) -->
+      <!-- px-8: 좌우 32px 여백 -->
+      <!-- flex items-center justify-between: 가로 배치, 세로 가운데, 양쪽 끝 정렬 -->
+      <!-- md:hidden: 태블릿/데스크톱에서는 숨김 (데스크톱은 팝업 사용) -->
+      <!-- z-[100]: 다른 모든 요소보다 위에 표시 (독립적인 레이어) -->
+      <!-- 위치는 JavaScript로 동적 조정하여 article 하단에 맞춤 -->
+
+      <!-- 스크린 리더 전용 제목: 시각적으로는 숨기고 접근성만 제공 -->
+      <h2 id="mobileShareBarLabel" class="sr-only">공유하기</h2>
+
+      <!-- 왼쪽: SHARE 텍스트와 소셜 미디어 아이콘들 -->
+      <div class="flex items-center gap-5">
+        <!-- SHARE 텍스트 -->
+        <span class="text-grayish-blue text-[13px] tracking-[0.3em] font-medium uppercase">
+          <!-- tracking-[0.3em]: 글자 간격 넓게 (자간 300%) -->
+          <!-- uppercase: 대문자로 변환 -->
+          SHARE
+        </span>
+
+        <!-- 소셜 미디어 아이콘들 -->
+        <div class="flex items-center gap-4" role="group" aria-label="소셜 미디어 공유 옵션">
+          <!-- role="group": 관련된 버튼들을 그룹으로 묶음 (접근성) -->
+
+          <!-- Facebook 아이콘 -->
+          <button type="button" aria-label="Facebook에 공유" class="hover:opacity-70 transition-opacity">
+            <!-- type="button": 액션 버튼임을 명시 (링크가 아닌 버튼이 적절) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+              <path fill="#FFF"
+                d="M18.896 0H1.104C.494 0 0 .494 0 1.104v17.793C0 19.506.494 20 1.104 20h9.58v-7.745H8.076V9.237h2.606V7.01c0-2.583 1.578-3.99 3.883-3.99 1.104 0 2.052.082 2.329.119v2.7h-1.598c-1.254 0-1.496.597-1.496 1.47v1.928h2.989l-.39 3.018h-2.6V20h5.098c.608 0 1.102-.494 1.102-1.104V1.104C20 .494 19.506 0 18.896 0z" />
+            </svg>
+          </button>
+
+          <!-- Twitter 아이콘 -->
+          <button type="button" aria-label="Twitter에 공유" class="hover:opacity-70 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17">
+              <path fill="#FFF"
+                d="M20 2.172a8.192 8.192 0 01-2.357.646 4.11 4.11 0 001.804-2.27 8.22 8.22 0 01-2.605.996A4.096 4.096 0 0013.847.248c-2.65 0-4.596 2.472-3.998 5.037A11.648 11.648 0 011.392 1a4.109 4.109 0 001.27 5.478 4.086 4.086 0 01-1.858-.513c-.045 1.9 1.318 3.679 3.291 4.075a4.113 4.113 0 01-1.853.07 4.106 4.106 0 003.833 2.849A8.25 8.25 0 010 14.658a11.616 11.616 0 006.29 1.843c7.618 0 11.922-6.434 11.663-12.205A8.354 8.354 0 0020 2.172z" />
+            </svg>
+          </button>
+
+          <!-- Pinterest 아이콘 -->
+          <button type="button" aria-label="Pinterest에 공유" class="hover:opacity-70 transition-opacity">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
+              <path fill="#FFF"
+                d="M10 0C4.478 0 0 4.477 0 10c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.522 0 10-4.477 10-10S15.522 0 10 0z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 오른쪽: 공유 버튼 (활성화 상태) -->
+      <button id="mobileShareButtonClose" type="button"
+        class="w-8 h-8 rounded-full bg-desaturated-dark-blue hover:bg-very-dark-grayish-blue flex items-center justify-center flex-shrink-0 transition-colors"
+        aria-label="공유 메뉴 닫기">
+        <!-- id: JavaScript에서 이 버튼을 찾기 위한 고유 식별자 -->
+        <!-- type="button": 버튼 타입 명시 (form submit 방지, 접근성 표준) -->
+        <!-- aria-label: 스크린 리더를 위한 버튼 설명 "공유 메뉴 닫기" (접근성) -->
+        <!-- w-8 h-8: 32x32px 크기 -->
+        <!-- rounded-full: 완전히 둥근 원형 -->
+        <!-- bg-desaturated-dark-blue: 중간 회색 배경 (활성화된 버튼 색상) -->
+        <!-- hover:bg-very-dark-grayish-blue: 호버 시 더 진한 색상 -->
+        <!-- flex-shrink-0: 공간이 부족해도 버튼 크기 유지 -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="13">
+          <path fill="#FFF"
+            d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z" />
+        </svg>
+      </button>
+    </section>
     </article>
 
   </main>
