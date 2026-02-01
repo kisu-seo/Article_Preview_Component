@@ -36,16 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // 공유 바 열기: 카드 하단에 공유 바 보이기 (마치 서랍 열기)
         mobileShareBar.classList.remove('hidden');
         shareButton.classList.add('active');
+        // 접근성: 팝업이 열렸음을 스크린 리더에 알림
+        shareButton.setAttribute('aria-expanded', 'true');
       } else {
         // 공유 바 닫기: 공유 바 숨기기 (마치 서랍 닫기)
         mobileShareBar.classList.add('hidden');
         shareButton.classList.remove('active');
+        // 접근성: 팝업이 닫혔음을 스크린 리더에 알림
+        shareButton.setAttribute('aria-expanded', 'false');
       }
     } else {
       // 데스크톱: 버튼 위에 팝업 토글
+      const isHidden = sharePopup.classList.contains('hidden');
       sharePopup.classList.toggle('hidden');
       // 버튼의 활성화 상태도 함께 토글 (배경색 변경)
       shareButton.classList.toggle('active');
+      // 접근성: 팝업 열림/닫힘 상태를 스크린 리더에 알림
+      shareButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     }
   });
   
@@ -56,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // 모바일 공유 바 닫기: 공유 바 숨기기
       mobileShareBar.classList.add('hidden');
       shareButton.classList.remove('active');
+      // 접근성: 팝업이 닫혔음을 스크린 리더에 알림
+      shareButton.setAttribute('aria-expanded', 'false');
     });
   }
   
@@ -75,6 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // 버튼 활성화 상태 제거
       shareButton.classList.remove('active');
+      
+      // 접근성: 팝업이 닫혔음을 스크린 리더에 알림
+      shareButton.setAttribute('aria-expanded', 'false');
     }
   });
   
@@ -85,6 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
       mobileShareBar.classList.add('hidden');
       sharePopup.classList.add('hidden');
       shareButton.classList.remove('active');
+      // 접근성: 팝업이 닫혔음을 스크린 리더에 알림
+      shareButton.setAttribute('aria-expanded', 'false');
     }
   });
   
@@ -94,6 +108,8 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileShareBar.classList.add('hidden');
     sharePopup.classList.add('hidden');
     shareButton.classList.remove('active');
+    // 접근성: 팝업이 닫혔음을 스크린 리더에 알림
+    shareButton.setAttribute('aria-expanded', 'false');
   });
   
 });
